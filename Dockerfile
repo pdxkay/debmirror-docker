@@ -14,6 +14,11 @@ ENV DEBMIRROR_SOURCE=N
 ENV CRON_FREQ="0 0 * * 5"
 ENV TIMEZONE="America/Los_Angeles"
 
+EXPOSE 80
+
+RUN mkdir /srv/apt
+VOLUME /srv/apt
+
 WORKDIR /app
 
 COPY . /app

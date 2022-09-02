@@ -1,4 +1,11 @@
 #!/bin/bash
+lockfile=/tmp/mirror.lock
+
+if [[ -e "$lockfile" ]]; then
+    echo "[mirror.sh] Already running! (or something bad happened?)" > /dev/stderr
+fi
+
+touch $lockfile
 
 echo "[mirror.sh] Let's do this thing"
 
@@ -39,3 +46,5 @@ debmirror --arch=$DEBMIRROR_ARCH \
           $APT_PATH/$DEBMIRROR_DIR
 
 echo "[mirror.sh] * debmirror donezo"
+
+rm $lockfile
